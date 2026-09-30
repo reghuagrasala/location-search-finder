@@ -120,3 +120,45 @@ footer span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowra
 #topBtn{border:0;background:transparent;color:#456276;font-size:9px;padding:2px 5px;flex:none}
 [hidden]{display:none!important}
 @media (min-width:600px){#app{padding-top:18px}.category{min-height:31px}}
+
+
+/* Distinct, soft category gradients — easy to scan without becoming bright. */
+.category:nth-child(6n+1){background:linear-gradient(135deg,#f4fbff,#e7f1fb)}
+.category:nth-child(6n+2){background:linear-gradient(135deg,#f8f7ff,#eeeafa)}
+.category:nth-child(6n+3){background:linear-gradient(135deg,#f2fbf7,#e3f4ed)}
+.category:nth-child(6n+4){background:linear-gradient(135deg,#fffaf2,#f6eee0)}
+.category:nth-child(6n+5){background:linear-gradient(135deg,#fff5f7,#f6e9ed)}
+.category:nth-child(6n){background:linear-gradient(135deg,#f5f7ff,#e8edf8)}
+/* Day/night adaptive background. The layout stays the same; only the palette changes. */
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111820;--card:#18212b;--line:#354453;--text:#e8eef5;
+    --muted:#a9b6c4;--accent:#62c28c;--accent-soft:#193b2c;
+    --shadow:0 1px 6px rgba(0,0,0,.35);
+  }
+  body{
+    background:linear-gradient(180deg,#0d141b 0%,#141d26 48%,#0f171f 100%);
+    color:var(--text);
+  }
+  .place-bar,.place-editor,.custom-search{
+    background:rgba(24,33,43,.96);border-color:#344352;
+  }
+  .change-btn,.secondary{
+    background:#253442;color:#dbe6ef;border-color:#40505f;
+  }
+  .editor-row input,.custom-row input{
+    background:#111a22;color:#edf3f8;border-color:#465666;
+  }
+  .editor-row button,.custom-row button{background:#2f7055;color:#fff}
+  .category:nth-child(6n+1){background:linear-gradient(135deg,#182b36,#1d3440)}
+  .category:nth-child(6n+2){background:linear-gradient(135deg,#211f35,#292643)}
+  .category:nth-child(6n+3){background:linear-gradient(135deg,#172d27,#1c3a30)}
+  .category:nth-child(6n+4){background:linear-gradient(135deg,#30281d,#3b3020)}
+  .category:nth-child(6n+5){background:linear-gradient(135deg,#321f28,#3b2730)}
+  .category:nth-child(6n){background:linear-gradient(135deg,#1d2738,#263149)}
+  .category{border-color:#3b4a59;color:#e5edf4;box-shadow:0 1px 4px rgba(0,0,0,.28)}
+  .category:active{background:#293a47}
+  .section-label{color:#c0ccd7}
+  footer{color:#91a1af}
+  #topBtn{color:#8eb2c8}
+}

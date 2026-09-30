@@ -121,46 +121,34 @@ function searchMaps(term){
   }else if(placeMode==="gps" && savedGps){
     center = savedGps;
   }
-  // For "My location", deliberately omit "near me".
-  // Google Maps can use the device's current location natively,
-  // avoiding an extra "near me" resolution step.
+  // For "My location", omit "near me" so Google Maps can use the
+  // device location natively without an extra query-resolution step.
 
   const webUrl = "https://www.google.com/maps/search/?api=1&query=" +
     encodeURIComponent(query) +
     (center ? "&center=" + encodeURIComponent(center) : "");
 
-  // On iPhone, launch the installed Google Maps app directly when possible.
-  // This avoids an unnecessary browser/universal-link handoff.
   const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
                 (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
   if(isIOS){
     const nativeUrl = "comgooglemaps://?q=" + encodeURIComponent(query) +
       (center ? "&center=" + encodeURIComponent(center) : "");
-    let returned = false;
+    let hidden = false;
 
-    const onReturn = () => {
-      returned = true;
-      window.removeEventListener("pagehide", onReturn);
-      window.removeEventListener("visibilitychange", onVisibility);
-    };
-    const onVisibility = () => {
-      if(document.visibilityState === "hidden") onReturn();
-    };
+    const onPageHide = () => { hidden = true; };
+    const onVisibility = () => { if(document.visibilityState === "hidden") hidden = true; };
 
-    window.addEventListener("pagehide", onReturn, {once:true});
-    window.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("pagehide", onPageHide, {once:true});
+    document.addEventListener("visibilitychange", onVisibility);
 
     window.location.href = nativeUrl;
 
-    // If Google Maps is not installed or the scheme is unavailable,
-    // fall back to Google's universal Maps URL.
     setTimeout(() => {
-      if(!returned && document.visibilityState !== "hidden"){
+      if(!hidden && document.visibilityState !== "hidden"){
         window.location.href = webUrl;
       }
-      window.removeEventListener("pagehide", onReturn);
-      window.removeEventListener("visibilitychange", onVisibility);
+      document.removeEventListener("visibilitychange", onVisibility);
     }, 700);
     return;
   }

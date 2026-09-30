@@ -121,6 +121,9 @@ footer span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowra
 [hidden]{display:none!important}
 @media (min-width:600px){#app{padding-top:18px}.category{min-height:31px}}
 
+
+
+/* Clean all-day palette: white controls + very light pastel category cards. */
 body{
   background:linear-gradient(180deg,#ffffff 0%,#f3f6f9 52%,#e9eef3 100%);
   color:#1d2732;
@@ -133,36 +136,65 @@ body{
 }
 .place-label{color:#687787}
 .place-text strong{color:#172330}
-.change-btn{background:#edf2f6;color:#29445a}
-.editor-row input,.custom-row input{background:#ffffff;color:#172330;border-color:#c4cfd9}
-.editor-row button,.custom-row button{background:#2f7055;color:#ffffff}
-.secondary{background:#edf2f6;color:#40576b;border-color:#cbd5df}
+.change-btn{
+  background:#edf2f6;
+  color:#29445a;
+}
+.editor-row input,.custom-row input{
+  background:#ffffff;
+  color:#172330;
+  border-color:#c4cfd9;
+}
+.editor-row button,.custom-row button{
+  background:#2f7055;
+  color:#ffffff;
+}
+.secondary{
+  background:#edf2f6;
+  color:#40576b;
+  border-color:#cbd5df;
+}
 .hint,.custom-examples{color:#6a7886}
+
+/* Six subtle pastel gradients make the long list easy to scan. */
 .category:nth-child(6n+1){background:linear-gradient(135deg,#f3faff,#e7f3fb)}
 .category:nth-child(6n+2){background:linear-gradient(135deg,#f8f5ff,#eee9fa)}
 .category:nth-child(6n+3){background:linear-gradient(135deg,#f1fbf6,#e3f4eb)}
 .category:nth-child(6n+4){background:linear-gradient(135deg,#fffaf0,#f7eddb)}
 .category:nth-child(6n+5){background:linear-gradient(135deg,#fff5f7,#f8e9ee)}
 .category:nth-child(6n){background:linear-gradient(135deg,#f4f7fc,#e8eef7)}
-.category{border-color:#c3ced9;color:#263544;box-shadow:0 1px 3px rgba(40,55,70,.10)}
+.category{
+  border-color:#c3ced9;
+  color:#263544;
+  box-shadow:0 1px 3px rgba(40,55,70,.10);
+}
 .category:active{background:#e7eef3}
 .section-label{color:#4d5d6c}
 footer{color:#71808d}
 #topBtn{color:#45667b}
 
+/* Keep the same readable light palette even when iPhone is in Dark Mode. */
 @media (prefers-color-scheme: dark){
-  body{background:linear-gradient(180deg,#ffffff 0%,#f3f6f9 52%,#e9eef3 100%);color:#1d2732}
-  .place-bar,.place-editor,.custom-search{background:#ffffff;border-color:#cbd5df}
+  body{
+    background:linear-gradient(180deg,#ffffff 0%,#f3f6f9 52%,#e9eef3 100%);
+    color:#1d2732;
+  }
+  .place-bar,.place-editor,.custom-search{
+    background:#ffffff;
+    border-color:#cbd5df;
+  }
   .place-label{color:#687787}
   .place-text strong{color:#172330}
   .change-btn{background:#edf2f6;color:#29445a}
-  .editor-row input,.custom-row input{background:#ffffff;color:#172330;border-color:#c4cfd9}
+  .editor-row input,.custom-row input{
+    background:#ffffff;color:#172330;border-color:#c4cfd9;
+  }
   .secondary{background:#edf2f6;color:#40576b;border-color:#cbd5df}
   .category:nth-child(6n+1){background:linear-gradient(135deg,#f3faff,#e7f3fb)}
   .category:nth-child(6n+2){background:linear-gradient(135deg,#f8f5ff,#eee9fa)}
   .category:nth-child(6n+3){background:linear-gradient(135deg,#f1fbf6,#e3f4eb)}
   .category:nth-child(6n+4){background:linear-gradient(135deg,#fffaf0,#f7eddb)}
-  .category:nth-child(6n+5){background:linear-gradient(135deg,#fff5f7,#f7e9ee)}
+  .category:nth-child(6n+5){background:linear-gradient(135deg,#fff5f7,#f8e9ee)}
   .category:nth-child(6n){background:linear-gradient(135deg,#f4f7fc,#e8eef7)}
   .category{border-color:#c3ced9;color:#263544;box-shadow:0 1px 3px rgba(40,55,70,.10)}
   .section-label{color:#4d5d6c}
@@ -170,58 +202,484 @@ footer{color:#71808d}
   #topBtn{color:#45667b}
 }
 
-html,body{touch-action:pan-y;overscroll-behavior-x:none}
-body{-webkit-text-size-adjust:100%}
-.offline-notice{
-  position:fixed;z-index:9999;top:calc(env(safe-area-inset-top) + 6px);left:50%;
-  transform:translateX(-50%);width:max-content;max-width:calc(100% - 28px);
-  padding:7px 13px;border:1px solid rgba(210,150,70,.38);border-radius:999px;
-  background:rgba(255,248,224,.94);color:#5e4922;
-  box-shadow:0 3px 12px rgba(45,55,65,.16),inset 0 1px 0 rgba(255,255,255,.9);
-  -webkit-backdrop-filter:blur(14px) saturate(125%);backdrop-filter:blur(14px) saturate(125%);
-  font-size:11px;font-weight:650;pointer-events:none;
+/* Glassy POI tabs */
+.category{
+  position:relative;
+  isolation:isolate;
+  min-height:43px;
+  margin:3px 0;
+  padding:4px 9px;
+  border:1px solid rgba(170,188,204,.58);
+  border-radius:10px;
+  background-color:rgba(255,255,255,.48);
+  background-image:linear-gradient(135deg,rgba(255,255,255,.72),rgba(255,255,255,.22));
+  -webkit-backdrop-filter:blur(12px) saturate(125%);
+  backdrop-filter:blur(12px) saturate(125%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.90),
+    inset 0 -1px 0 rgba(150,170,188,.16),
+    0 2px 6px rgba(42,60,78,.09);
+  color:#243443;
+  overflow:hidden;
 }
-.status-dot{background:#36b879 !important;box-shadow:0 0 0 7px rgba(54,184,121,.12),0 2px 8px rgba(35,80,55,.14);transition:background .25s ease,box-shadow .25s ease}
-.status-dot.weak{background:#e5ae28 !important;box-shadow:0 0 0 7px rgba(229,174,40,.14),0 2px 8px rgba(120,90,20,.14)}
-.status-dot.offline{background:#df4b4b !important;box-shadow:0 0 0 7px rgba(223,75,75,.13),0 2px 8px rgba(120,35,35,.14)}
+.category::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  pointer-events:none;
+  background:linear-gradient(105deg,rgba(255,255,255,.42),rgba(255,255,255,0) 42%,rgba(255,255,255,.18));
+  z-index:-1;
+}
+.category:active{
+  transform:scale(.992);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.75),
+    0 1px 3px rgba(42,60,78,.12);
+}
 
+/* Keep the six pastel identities, but make each one translucent and glass-like. */
+.category:nth-child(6n+1){background-color:rgba(226,242,253,.56);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(218,239,252,.42))}
+.category:nth-child(6n+2){background-color:rgba(239,232,251,.54);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(234,224,249,.40))}
+.category:nth-child(6n+3){background-color:rgba(224,245,235,.56);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(215,241,228,.42))}
+.category:nth-child(6n+4){background-color:rgba(249,239,216,.54);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(247,232,198,.40))}
+.category:nth-child(6n+5){background-color:rgba(249,231,237,.54);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(247,222,231,.40))}
+.category:nth-child(6n){background-color:rgba(230,237,248,.56);background-image:linear-gradient(135deg,rgba(255,255,255,.68),rgba(222,232,246,.42))}
+
+/* Slightly smaller typography/height keeps the long list compact on iPhone. */
+.category .icon{width:20px;height:20px;font-size:13px}
+.category .label{font-size:10px;font-weight:650;letter-spacing:.05px}
+
+@supports not ((backdrop-filter:blur(1px))){
+  .category{background-color:#f2f5f8}
+}
+
+/* Glass treatment for the two search controls as well, while retaining white readability. */
+.place-bar,.place-editor,.custom-search{
+  background:rgba(255,255,255,.72);
+  -webkit-backdrop-filter:blur(16px) saturate(120%);
+  backdrop-filter:blur(16px) saturate(120%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 2px 8px rgba(35,50,65,.10);
+}
+
+/* Refined iOS glass hierarchy */
+:root{
+  --glass-white:rgba(255,255,255,.68);
+  --glass-border:rgba(169,185,200,.58);
+  --dark:#1f2d3d;
+  --soft:#647486;
+}
+
+/* Cleaner, lighter header typography */
+.title-row{
+  padding:4px 7px 8px;
+  align-items:center;
+}
+h1{
+  font-size:16px;
+  line-height:1.05;
+  font-weight:720;
+  letter-spacing:-.35px;
+  color:#1c2937;
+}
+.sub{
+  margin-top:4px;
+  font-size:10px;
+  line-height:1.1;
+  letter-spacing:.05px;
+  color:#687786;
+}
+.status-dot{
+  width:10px;height:10px;
+  background:#48ae76;
+  box-shadow:0 0 0 4px rgba(72,174,118,.13);
+}
+
+/* Main location glass card */
+.place-bar{
+  min-height:62px;
+  padding:7px 9px 7px 11px;
+  border-radius:13px;
+  border:1px solid var(--glass-border);
+  background:
+    linear-gradient(135deg,rgba(255,255,255,.88),rgba(242,247,251,.58));
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+  backdrop-filter:blur(18px) saturate(135%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(150,170,188,.12),
+    0 3px 10px rgba(35,52,68,.10);
+}
+.pin{
+  width:34px;height:34px;
+  margin-right:10px;
+  background:linear-gradient(145deg,rgba(224,248,236,.92),rgba(204,238,221,.58));
+  border:1px solid rgba(107,180,139,.18);
+  font-size:18px;
+}
+.place-label{
+  font-size:9px;
+  line-height:1;
+  margin-bottom:3px;
+  color:#6c7b89;
+  letter-spacing:.15px;
+}
+.place-text strong{
+  font-size:13px;
+  line-height:1.05;
+  font-weight:720;
+  letter-spacing:-.15px;
+  color:#1c2b3a;
+}
+.change-btn{
+  flex-basis:76px;
+  width:76px;
+  max-width:76px;
+  height:38px;
+  border-radius:10px;
+  background:linear-gradient(145deg,#f1f5f9,#e7edf3);
+  border:1px solid rgba(190,202,214,.38);
+  color:#29455b;
+  font-size:11px;
+  font-weight:700;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.85);
+}
+
+/* Custom-place glass panel */
+.place-editor{
+  margin-top:6px;
+  padding:9px;
+  border-radius:13px;
+  background:rgba(255,255,255,.70);
+  border-color:var(--glass-border);
+  -webkit-backdrop-filter:blur(18px) saturate(135%);
+  backdrop-filter:blur(18px) saturate(135%);
+}
+.editor-row{gap:7px}
+.editor-row input{
+  height:39px;
+  border-radius:10px;
+  padding:8px 11px;
+  font-size:12px;
+  background:rgba(255,255,255,.84);
+  border-color:#c3d0db;
+  color:#1f2d3d;
+}
+.editor-row input::placeholder{color:#8794a1;opacity:1}
+.editor-row button{
+  flex-basis:66px;
+  width:66px;
+  max-width:66px;
+  height:39px;
+  border-radius:10px;
+  font-size:11px;
+  background:linear-gradient(145deg,#377e61,#2d6e54);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 2px 5px rgba(39,91,68,.16);
+}
+.editor-actions{margin-top:7px;gap:7px}
+.secondary{
+  border-radius:9px;
+  padding:6px 10px;
+  font-size:10px;
+  background:linear-gradient(145deg,#f5f8fb,#e9eff5);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9);
+}
+.hint{
+  margin:7px 2px 1px;
+  font-size:9px;
+  line-height:1.3;
+  color:#71808e;
+}
+
+/* More polished glass category tabs */
+.category{
+  min-height:41px;
+  margin:4px 0;
+  padding:4px 10px;
+  border-radius:11px;
+  border:1px solid rgba(164,181,197,.58);
+  background-color:rgba(255,255,255,.42);
+  -webkit-backdrop-filter:blur(14px) saturate(135%);
+  backdrop-filter:blur(14px) saturate(135%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.92),
+    inset 0 -1px 0 rgba(150,170,188,.10),
+    0 2px 6px rgba(42,60,78,.08);
+  color:#263746;
+}
+.category::before{
+  background:
+    linear-gradient(105deg,rgba(255,255,255,.58),rgba(255,255,255,0) 45%,rgba(255,255,255,.20));
+}
+.category .icon{
+  width:24px;height:24px;
+  font-size:14px;
+}
+.category .label{
+  font-size:11px;
+  font-weight:650;
+  letter-spacing:.05px;
+}
+.category:nth-child(6n+1){background-image:linear-gradient(110deg,rgba(224,241,253,.70),rgba(238,248,253,.40))}
+.category:nth-child(6n+2){background-image:linear-gradient(110deg,rgba(235,227,250,.70),rgba(248,244,253,.40))}
+.category:nth-child(6n+3){background-image:linear-gradient(110deg,rgba(218,242,229,.70),rgba(241,250,245,.40))}
+.category:nth-child(6n+4){background-image:linear-gradient(110deg,rgba(247,232,196,.68),rgba(255,249,232,.42))}
+.category:nth-child(6n+5){background-image:linear-gradient(110deg,rgba(247,220,229,.68),rgba(255,244,248,.42))}
+.category:nth-child(6n){background-image:linear-gradient(110deg,rgba(222,231,247,.70),rgba(243,247,253,.42))}
+
+/* Custom POI card */
+.custom-search{
+  border-radius:13px;
+  padding:9px;
+  background:rgba(255,255,255,.70);
+}
+.section-label{
+  font-size:10px;
+  font-weight:720;
+  letter-spacing:.1px;
+}
+.custom-row{gap:7px}
+.custom-row input{
+  height:39px;
+  border-radius:10px;
+  font-size:12px;
+}
+.custom-row button{
+  flex-basis:40px;
+  width:40px;
+  max-width:40px;
+  height:39px;
+  border-radius:10px;
+  background:linear-gradient(145deg,#377e61,#2d6e54);
+}
+.custom-examples{font-size:8px;margin-top:6px}
+
+/* Keep the refined light glass appearance in iPhone Dark Mode too. */
+@media (prefers-color-scheme:dark){
+  body{background:linear-gradient(180deg,#ffffff 0%,#f3f6f9 52%,#e9eef3 100%);color:#1f2d3d}
+  h1,.place-text strong,.category{color:#1f2d3d}
+  .sub,.place-label,.hint,.custom-examples{color:#687786}
+  .place-bar,.place-editor,.custom-search{background:rgba(255,255,255,.70);border-color:var(--glass-border)}
+  .editor-row input,.custom-row input{background:rgba(255,255,255,.84);color:#1f2d3d;border-color:#c3d0db}
+  .change-btn,.secondary{color:#29455b;background:linear-gradient(145deg,#f1f5f9,#e7edf3)}
+  .category{border-color:rgba(164,181,197,.58)}
+}
+
+
+/* iPhone app behavior: vertical scrolling only; no horizontal or pinch gesture. */
+html,body{
+  touch-action:pan-y;
+  overscroll-behavior-x:none;
+}
+body{
+  -webkit-text-size-adjust:100%;
+}
+.offline-notice{
+  position:fixed;
+  z-index:9999;
+  top:calc(env(safe-area-inset-top) + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 28px);
+  padding:7px 13px;
+  border:1px solid rgba(210,150,70,.38);
+  border-radius:999px;
+  background:rgba(255,248,224,.94);
+  color:#5e4922;
+  box-shadow:0 3px 12px rgba(45,55,65,.16),inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(14px) saturate(125%);
+  backdrop-filter:blur(14px) saturate(125%);
+  font-size:11px;
+  font-weight:650;
+  pointer-events:none;
+}
+@media (prefers-color-scheme:dark){
+  .offline-notice{
+    background:rgba(255,248,224,.96);
+    color:#5e4922;
+  }
+}
+
+/* Network status: green = good, yellow = weak, red = offline. */
+.status-dot{
+  background:#36b879 !important;
+  box-shadow:0 0 0 7px rgba(54,184,121,.12),0 2px 8px rgba(35,80,55,.14);
+  transition:background .25s ease, box-shadow .25s ease;
+}
+.status-dot.weak{
+  background:#e5ae28 !important;
+  box-shadow:0 0 0 7px rgba(229,174,40,.14),0 2px 8px rgba(120,90,20,.14);
+}
+.status-dot.offline{
+  background:#df4b4b !important;
+  box-shadow:0 0 0 7px rgba(223,75,75,.13),0 2px 8px rgba(120,35,35,.14);
+}
+
+
+/* Final iPhone layout: persistent top controls + persistent bottom POI search.
+   Existing card sizes, colours and typography remain unchanged. */
 .app-header{
-  position:relative;top:auto;flex:0 0 auto;z-index:20;margin:0 0 6px;padding-top:0;padding-bottom:4px;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  padding-top:env(safe-area-inset-top);
+  margin-top:calc(-1 * env(safe-area-inset-top));
+  padding-bottom:4px;
+  background:linear-gradient(180deg,rgba(255,255,255,.98) 0%,rgba(255,255,255,.94) 88%,rgba(255,255,255,0) 100%);
+  -webkit-backdrop-filter:blur(16px) saturate(125%);
+  backdrop-filter:blur(16px) saturate(125%);
+}
+
+.custom-search{
+  position:fixed;
+  z-index:1100;
+  left:50%;
+  bottom:0;
+  transform:translateX(-50%);
+  width:min(430px,100%);
+  max-width:430px;
+  margin:0;
+  border-bottom-left-radius:0;
+  border-bottom-right-radius:0;
+  padding-bottom:calc(9px + env(safe-area-inset-bottom));
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    0 -3px 14px rgba(35,50,65,.12);
+}
+
+#app{
+  padding-bottom:calc(env(safe-area-inset-bottom) + 112px);
+}
+
+footer{
+  padding-bottom:calc(env(safe-area-inset-bottom) + 8px);
+}
+
+@media (min-width:600px){
+  .custom-search{
+    border-radius:13px;
+    bottom:10px;
+    width:min(430px,calc(100% - 20px));
+  }
+}
+
+
+/* Final viewport architecture:
+   header stays static, only the category area scrolls, and the custom search
+   remains fixed at the bottom of the app viewport. */
+html,body{
+  height:100%;
+  overflow:hidden;
+  overscroll-behavior:none;
+}
+#app{
+  height:100dvh;
+  min-height:100vh;
+  padding-top:calc(env(safe-area-inset-top) + 8px);
+  padding-bottom:0;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+.app-header{
+  position:relative;
+  top:auto;
+  flex:0 0 auto;
+  z-index:20;
+  margin:0 0 6px;
+  padding-top:0;
+  padding-bottom:4px;
   background:linear-gradient(180deg,rgba(255,255,255,.99) 0%,rgba(255,255,255,.97) 88%,rgba(255,255,255,0) 100%);
 }
-html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-#app{
-  height:100dvh;min-height:100vh;padding-top:calc(env(safe-area-inset-top) + 8px);padding-bottom:0;
-  display:flex;flex-direction:column;overflow:hidden;
-}
 .category-section{
-  flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;
-  overscroll-behavior-y:contain;padding:2px 0 118px;scrollbar-width:none;
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  overflow-x:hidden;
+  -webkit-overflow-scrolling:touch;
+  overscroll-behavior-y:contain;
+  padding:2px 0 118px;
+  scrollbar-width:none;
 }
-.category-section::-webkit-scrollbar{display:none}
+.category-section::-webkit-scrollbar{
+  display:none;
+}
 .custom-search{
-  position:relative;left:auto;bottom:auto;transform:none;flex:0 0 auto;width:100%;max-width:430px;margin:0;
-  border-radius:13px 13px 0 0;padding:9px;padding-bottom:calc(9px + env(safe-area-inset-bottom));z-index:30;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.96),0 -3px 14px rgba(35,50,65,.12);
+  position:relative;
+  left:auto;
+  bottom:auto;
+  transform:none;
+  flex:0 0 auto;
+  width:100%;
+  max-width:430px;
+  margin:0;
+  border-radius:13px 13px 0 0;
+  padding:9px;
+  padding-bottom:calc(9px + env(safe-area-inset-bottom));
+  z-index:30;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.96),
+    0 -3px 14px rgba(35,50,65,.12);
 }
-footer{display:none}
-.place-bar,.custom-search{
-  background:linear-gradient(135deg,rgba(255,255,255,.62) 0%,rgba(245,249,252,.46) 48%,rgba(255,255,255,.58) 100%);
-  border-color:rgba(160,178,195,.48);
-  -webkit-backdrop-filter:blur(22px) saturate(145%);backdrop-filter:blur(22px) saturate(145%);
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.98),inset 0 -1px 0 rgba(150,170,188,.12),0 3px 12px rgba(35,50,65,.10);
+footer{
+  display:none;
 }
-.place-bar::before,.custom-search::before{
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(105deg,rgba(255,255,255,.38),rgba(255,255,255,0) 43%,rgba(255,255,255,.18));
-}
-.place-bar{position:relative}.custom-search{position:relative}
-.place-bar > *,.custom-search > *{position:relative;z-index:1}
 
-/* Correct target: categories are generated inside #categoryList, nested under .category-section. */
+
+/* Glass finish for the two fixed search bars only.
+   No changes to their size, spacing, typography, controls, or layout. */
+.place-bar,
+.custom-search{
+  background:
+    linear-gradient(135deg,
+      rgba(255,255,255,.62) 0%,
+      rgba(245,249,252,.46) 48%,
+      rgba(255,255,255,.58) 100%);
+  border-color:rgba(160,178,195,.48);
+  -webkit-backdrop-filter:blur(22px) saturate(145%);
+  backdrop-filter:blur(22px) saturate(145%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.98),
+    inset 0 -1px 0 rgba(150,170,188,.12),
+    0 3px 12px rgba(35,50,65,.10);
+}
+.place-bar::before,
+.custom-search::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  border-radius:inherit;
+  background:linear-gradient(
+    105deg,
+    rgba(255,255,255,.38),
+    rgba(255,255,255,0) 43%,
+    rgba(255,255,255,.18)
+  );
+}
+.place-bar{
+  position:relative;
+}
+.custom-search{
+  position:relative;
+}
+.place-bar > *,
+.custom-search > *{
+  position:relative;
+  z-index:1;
+}
+
+
+/* Compact two-column iPhone category grid.
+   Categories are generated inside #categoryList, so the grid belongs on that
+   nested element rather than on the scrolling wrapper. */
 .category-section{
   display:block;
   width:100%;
+  min-width:0;
 }
 #categoryList{
   width:100%;
@@ -232,6 +690,7 @@ footer{display:none}
   row-gap:8px;
   align-content:start;
 }
+
 .category{
   width:100%;
   min-width:0;
@@ -247,16 +706,29 @@ footer{display:none}
   letter-spacing:.05px;
   line-height:1.05;
 }
+
 .category .icon{
-  width:22px;height:22px;font-size:14px;flex:0 0 22px;
+  width:22px;
+  height:22px;
+  font-size:14px;
+  flex:0 0 22px;
 }
+
 .category .label{
   min-width:0;
   font-family:"Avenir Next Condensed","Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
-  font-size:13px;font-weight:500;letter-spacing:.05px;line-height:1.05;
-  white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
-  overflow:hidden;text-overflow:ellipsis;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.05px;
+  line-height:1.05;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  text-overflow:ellipsis;
 }
+
 @media (max-width:350px){
   #categoryList{column-gap:6px;row-gap:7px}
   .category{min-height:47px;height:47px;padding-left:7px;padding-right:7px}

@@ -466,3 +466,39 @@ h1{
   .change-btn,.secondary{color:#29455b;background:linear-gradient(145deg,#f1f5f9,#e7edf3)}
   .category{border-color:rgba(164,181,197,.58)}
 }
+
+
+/* iPhone app behavior: vertical scrolling only; no horizontal or pinch gesture. */
+html,body{
+  touch-action:pan-y;
+  overscroll-behavior-x:none;
+}
+body{
+  -webkit-text-size-adjust:100%;
+}
+.offline-notice{
+  position:fixed;
+  z-index:9999;
+  top:calc(env(safe-area-inset-top) + 6px);
+  left:50%;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:calc(100% - 28px);
+  padding:7px 13px;
+  border:1px solid rgba(210,150,70,.38);
+  border-radius:999px;
+  background:rgba(255,248,224,.94);
+  color:#5e4922;
+  box-shadow:0 3px 12px rgba(45,55,65,.16),inset 0 1px 0 rgba(255,255,255,.9);
+  -webkit-backdrop-filter:blur(14px) saturate(125%);
+  backdrop-filter:blur(14px) saturate(125%);
+  font-size:11px;
+  font-weight:650;
+  pointer-events:none;
+}
+@media (prefers-color-scheme:dark){
+  .offline-notice{
+    background:rgba(255,248,224,.96);
+    color:#5e4922;
+  }
+}

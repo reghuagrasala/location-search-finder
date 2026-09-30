@@ -14,3 +14,5 @@ self.addEventListener("fetch",e=>{
     return r;
   }).catch(()=>cached)));
 });
+
+// Automatic deployment trigger: refresh cache v5.

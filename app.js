@@ -25,7 +25,7 @@ const placeEditor = document.getElementById("placeEditor");
 const placeInput = document.getElementById("placeInput");
 const poiInput = document.getElementById("poiInput");
 
-const savedPlace = localStorage.getItem("lsf-place");
+let savedPlace = localStorage.getItem("lsf-place");
 const savedGps = localStorage.getItem("lsf-gps");
 let placeMode = savedPlace ? "custom" : (savedGps ? "gps" : "my");
 
@@ -131,3 +131,22 @@ document.getElementById("topBtn").addEventListener("click",resetToTop);
 if("serviceWorker" in navigator){
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
 }
+
+
+// Keep pinch zoom disabled for this app while preserving normal one-finger vertical scrolling.
+document.addEventListener("gesturestart", e => e.preventDefault(), {passive:false});
+document.addEventListener("gesturechange", e => e.preventDefault(), {passive:false});
+document.addEventListener("gestureend", e => e.preventDefault(), {passive:false});
+document.addEventListener("touchmove", e => {
+  if (e.touches.length > 1) e.preventDefault();
+}, {passive:false});
+
+// Offline status: the cached PWA remains available, while network-dependent
+// Google Maps searches are clearly identified as unavailable.
+const offlineNotice = document.getElementById("offlineNotice");
+function updateNetworkStatus(){
+  offlineNotice.hidden = navigator.onLine;
+}
+window.addEventListener("online", updateNetworkStatus);
+window.addEventListener("offline", updateNetworkStatus);
+updateNetworkStatus();

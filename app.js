@@ -24,6 +24,7 @@ const placeDisplay = document.getElementById("placeDisplay");
 const placeEditor = document.getElementById("placeEditor");
 const placeInput = document.getElementById("placeInput");
 const poiInput = document.getElementById("poiInput");
+const statusDot = document.querySelector(".status-dot");
 
 let savedPlace = localStorage.getItem("lsf-place");
 const savedGps = localStorage.getItem("lsf-gps");
@@ -144,9 +145,43 @@ document.addEventListener("touchmove", e => {
 // Offline status: the cached PWA remains available, while network-dependent
 // Google Maps searches are clearly identified as unavailable.
 const offlineNotice = document.getElementById("offlineNotice");
+
 function updateNetworkStatus(){
-  offlineNotice.hidden = navigator.onLine;
+  const online = navigator.onLine;
+  const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+  let weak = false;
+
+  if (online && connection) {
+    const type = String(connection.effectiveType || "").toLowerCase();
+    const downlink = Number(connection.downlink);
+    weak = type === "slow-2g" || type === "2g" || (Number.isFinite(downlink) && downlink > 0 && downlink < 1.5);
+  }
+
+  statusDot.classList.toggle("weak", online && weak);
+  statusDot.classList.toggle("offline", !online);
+
+  if (!online) {
+    statusDot.setAttribute("aria-label", "Network unavailable");
+    statusDot.title = "Network unavailable";
+    offlineNotice.textContent = "⚠️ Network not available";
+    offlineNotice.hidden = false;
+  } else if (weak) {
+    statusDot.setAttribute("aria-label", "Weak network");
+    statusDot.title = "Weak network";
+    offlineNotice.textContent = "⚠️ Weak network connection";
+    offlineNotice.hidden = false;
+  } else {
+    statusDot.setAttribute("aria-label", "Network available");
+    statusDot.title = "Network available";
+    offlineNotice.hidden = true;
+  }
 }
+
 window.addEventListener("online", updateNetworkStatus);
 window.addEventListener("offline", updateNetworkStatus);
+
+const networkConnection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+if (networkConnection && networkConnection.addEventListener) {
+  networkConnection.addEventListener("change", updateNetworkStatus);
+}
 updateNetworkStatus();

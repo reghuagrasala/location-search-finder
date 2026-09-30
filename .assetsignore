@@ -1,0 +1,8 @@
+.github/
+README.md
+cloudflare-worker.js
+404.html
+_headers
+wrangler.jsonc
+src/
+*.md

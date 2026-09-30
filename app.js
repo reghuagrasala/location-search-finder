@@ -111,16 +111,61 @@ function searchMaps(term){
     offlineNotice.hidden = false;
     return;
   }
-  let query=term;
+
+  const cleanTerm = term.trim();
+  let query = cleanTerm;
+  let center = "";
+
   if(placeMode==="custom" && savedPlace){
-    query=`${term} near ${savedPlace}`;
+    query = `${cleanTerm} near ${savedPlace}`;
   }else if(placeMode==="gps" && savedGps){
-    query=`${term} near ${savedGps}`;
-  }else{
-    query=`${term} near me`;
+    center = savedGps;
   }
-  const url="https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(query);
-  window.location.href=url;
+  // For "My location", deliberately omit "near me".
+  // Google Maps can use the device's current location natively,
+  // avoiding an extra "near me" resolution step.
+
+  const webUrl = "https://www.google.com/maps/search/?api=1&query=" +
+    encodeURIComponent(query) +
+    (center ? "&center=" + encodeURIComponent(center) : "");
+
+  // On iPhone, launch the installed Google Maps app directly when possible.
+  // This avoids an unnecessary browser/universal-link handoff.
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+  if(isIOS){
+    const nativeUrl = "comgooglemaps://?q=" + encodeURIComponent(query) +
+      (center ? "&center=" + encodeURIComponent(center) : "");
+    let returned = false;
+
+    const onReturn = () => {
+      returned = true;
+      window.removeEventListener("pagehide", onReturn);
+      window.removeEventListener("visibilitychange", onVisibility);
+    };
+    const onVisibility = () => {
+      if(document.visibilityState === "hidden") onReturn();
+    };
+
+    window.addEventListener("pagehide", onReturn, {once:true});
+    window.addEventListener("visibilitychange", onVisibility);
+
+    window.location.href = nativeUrl;
+
+    // If Google Maps is not installed or the scheme is unavailable,
+    // fall back to Google's universal Maps URL.
+    setTimeout(() => {
+      if(!returned && document.visibilityState !== "hidden"){
+        window.location.href = webUrl;
+      }
+      window.removeEventListener("pagehide", onReturn);
+      window.removeEventListener("visibilitychange", onVisibility);
+    }, 700);
+    return;
+  }
+
+  window.location.href = webUrl;
 }
 
 // iPhone/Safari: when returning from Google Maps, restore the app to its top.

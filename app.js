@@ -106,6 +106,11 @@ function customSearch(){
 }
 
 function searchMaps(term){
+  if(!navigator.onLine){
+    offlineNotice.textContent = "⚠️ Network not available — Google Maps search needs Internet";
+    offlineNotice.hidden = false;
+    return;
+  }
   let query=term;
   if(placeMode==="custom" && savedPlace){
     query=`${term} near ${savedPlace}`;
@@ -145,6 +150,7 @@ document.addEventListener("touchmove", e => {
 // Offline status: the cached PWA remains available, while network-dependent
 // Google Maps searches are clearly identified as unavailable.
 const offlineNotice = document.getElementById("offlineNotice");
+const APP_VERSION = "1.0.0";
 
 function updateNetworkStatus(){
   const online = navigator.onLine;
@@ -185,3 +191,5 @@ if (networkConnection && networkConnection.addEventListener) {
   networkConnection.addEventListener("change", updateNetworkStatus);
 }
 updateNetworkStatus();
+
+window.locationSearchFinderVersion = APP_VERSION;

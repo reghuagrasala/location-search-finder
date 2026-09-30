@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#eef2f7">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Location Finder">
+  <meta name="description" content="Compact static place and POI finder for Google Maps.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Location Search Finder</title>
+</head>
+<body>
+  <main id="app">
+    <header class="app-header">
+      <div class="title-row">
+        <div>
+          <h1>Location Search Finder</h1>
+          <div class="sub">Search nearby places with Google Maps</div>
+        </div>
+        <span class="status-dot" aria-label="Ready"></span>
+      </div>
+
+      <section class="place-bar" aria-label="Place selection">
+        <div class="place-main">
+          <span class="pin">⌖</span>
+          <div class="place-text">
+            <span class="place-label">Search near</span>
+            <strong id="placeDisplay">My location</strong>
+          </div>
+        </div>
+        <button id="changePlace" class="change-btn" type="button">Change</button>
+      </section>
+
+      <section id="placeEditor" class="place-editor" hidden>
+        <div class="editor-row">
+          <input id="placeInput" type="text" autocomplete="off"
+                 placeholder="Enter town, area, address or landmark">
+          <button id="savePlace" type="button">Set</button>
+        </div>
+        <div class="editor-actions">
+          <button id="useGps" type="button" class="secondary">⌖ Use GPS</button>
+          <button id="clearPlace" type="button" class="secondary">Reset</button>
+        </div>
+        <div class="hint">The place is saved on this device. GPS is used only to create the Google Maps search.</div>
+      </section>
+    </header>
+
+    <section class="category-section" aria-label="Place categories">
+      <div id="categoryList"></div>
+    </section>
+
+    <section class="custom-search" aria-label="Custom POI search">
+      <div class="section-label">Custom POI Search</div>
+      <div class="custom-row">
+        <input id="poiInput" type="search" enterkeyhint="search"
+               placeholder="Search any place or POI…">
+        <button id="poiSearch" type="button" aria-label="Search">⌕</button>
+      </div>
+      <div class="custom-examples">Examples: pharmacy, EV charging, temple, restaurant, petrol pump</div>
+    </section>
+
+    <footer>
+      <button id="topBtn" type="button">↑ Top</button>
+      <span>Static • Google Maps results</span>
+    </footer>
+  </main>
+
+<script src="app.js"></script>
+</body>
+</html>

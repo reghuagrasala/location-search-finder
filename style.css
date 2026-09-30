@@ -671,3 +671,58 @@ footer{
   position:relative;
   z-index:1;
 }
+
+
+/* Compact two-column iPhone category grid.
+   Uses the available width efficiently while keeping comfortable touch targets. */
+.category-section{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:8px;
+  row-gap:8px;
+  align-content:start;
+}
+
+.category{
+  width:100%;
+  min-width:0;
+  min-height:49px;
+  height:49px;
+  margin:0;
+  padding:5px 8px;
+  gap:6px;
+  border-radius:11px;
+  font-family:"Avenir Next Condensed","Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.05px;
+  line-height:1.05;
+}
+
+.category .icon{
+  width:22px;
+  height:22px;
+  font-size:14px;
+  flex:0 0 22px;
+}
+
+.category .label{
+  min-width:0;
+  font-family:"Avenir Next Condensed","Arial Narrow","Roboto Condensed","Helvetica Neue",Arial,sans-serif;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:.05px;
+  line-height:1.05;
+  white-space:normal;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+@media (max-width:350px){
+  .category-section{column-gap:6px;row-gap:7px}
+  .category{min-height:47px;height:47px;padding-left:7px;padding-right:7px}
+  .category .label{font-size:12px}
+}

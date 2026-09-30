@@ -35,3 +35,19 @@ Examples:
 
 ## Important iPhone behavior
 The app deliberately navigates the current Safari/PWA window to Google Maps. When Safari/PWA becomes visible again, it calls `scrollTo(0,0)` so the app returns to its top.
+
+
+## Release
+- Version: **1.0.0**
+- Offline application shell is available after the first successful online load.
+- Network status indicator: green = normal, yellow = weak/slow when supported by the browser, red = offline.
+- Google Maps searches require an Internet connection.
+- The app is designed for iPhone/PWA portrait use with vertical scrolling and pinch zoom disabled.
+
+## Cloudflare Pages
+Recommended deployment settings:
+- Framework preset: **None**
+- Build command: **None**
+- Build output directory: **/** 
+- Root directory: **/**
+- The included `_headers` file is used by Cloudflare Pages for security/privacy response headers.

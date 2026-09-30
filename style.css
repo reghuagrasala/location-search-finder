@@ -502,3 +502,18 @@ body{
     color:#5e4922;
   }
 }
+
+/* Network status: green = good, yellow = weak, red = offline. */
+.status-dot{
+  background:#36b879 !important;
+  box-shadow:0 0 0 7px rgba(54,184,121,.12),0 2px 8px rgba(35,80,55,.14);
+  transition:background .25s ease, box-shadow .25s ease;
+}
+.status-dot.weak{
+  background:#e5ae28 !important;
+  box-shadow:0 0 0 7px rgba(229,174,40,.14),0 2px 8px rgba(120,90,20,.14);
+}
+.status-dot.offline{
+  background:#df4b4b !important;
+  box-shadow:0 0 0 7px rgba(223,75,75,.13),0 2px 8px rgba(120,35,35,.14);
+}

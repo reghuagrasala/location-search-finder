@@ -735,3 +735,9 @@ footer{
   .category .label{font-size:12px}
 }
 /* Cloudflare automatic build trigger: nested grid fix 2026-09-30 */
+
+/* Scrollable category area: pitch-black background only.
+   All existing category colours and other UI settings remain unchanged. */
+.category-section{
+  background:#000000;
+}
